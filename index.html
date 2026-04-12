@@ -288,6 +288,10 @@ button {
   display: none;
   z-index: 1000;
 }
+#cartBox.active {
+  display: block;
+
+}
 
 .cart-controls {
   display: flex;
@@ -427,6 +431,9 @@ button {
 </div>
 
 <div id="productList" class="products"></div>
+
+
+
 
 <!-- 🔽 CART BOX -->
 <div id="cartBox">
@@ -674,10 +681,26 @@ function renderCart(){
 }
 
 /* CART TOGGLE */
-function toggleCart(){
-  let box=document.getElementById("cartBox");
-  box.style.display = box.style.display==="none" ? "block":"none";
+const cartBox = document.getElementById("cartBox");
+const cartIcon = document.querySelector(".cart-icon");
+
+// toggle
+function toggleCart() {
+  cartBox.classList.toggle("active");
 }
+
+// гадна дархад хаах
+document.addEventListener("click", function (e) {
+  if (!cartBox.contains(e.target) && !cartIcon.contains(e.target)) {
+    cartBox.classList.remove("active");
+  }
+});
+
+// дотор click хаахгүй
+cartBox.addEventListener("click", function (e) {
+  e.stopPropagation();
+});
+
 
 /* IMAGE */
 function showImage(src){
@@ -691,6 +714,5 @@ document.addEventListener("DOMContentLoaded",()=>{
   renderProducts();
 });
 </script>
-
 </body>
 </html>
