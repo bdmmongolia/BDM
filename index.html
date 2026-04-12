@@ -95,7 +95,7 @@ body {
 .cart-controls {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .cart-controls button {
@@ -106,6 +106,16 @@ body {
   color: white;
   border: none;
 }
+
+.cart-controls span {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
 #cartList {
   list-style: none;
   padding: 0;
@@ -124,13 +134,16 @@ body {
 }
 
 .categories button {
-  padding: 6px 14px;
   border: 1px solid #ccc;
   background: white;
   color: #333;
   border-radius: 20px;
   cursor: pointer;
   transition: 0.2s;
+  font-weight: bold;
+  min-width: 110px;
+  padding: 12px 19px;
+  text-align: center;
 }
 
 /* hover үед */
@@ -153,6 +166,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
   gap: 15px;
   padding: 10px;
+  align-items: stretch;
 }
 
 .card {
@@ -163,6 +177,7 @@ body {
   transition: 0.2s;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
 }
 
@@ -171,8 +186,9 @@ body {
 }
 
 .card img {
-  width: 100%;
-  height: 120px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
   object-fit: contain;
   cursor: pointer;
 }
@@ -209,27 +225,64 @@ button {
   border-radius: 8px;
 }
 
-.card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
 .price {
   font-weight: bold;
   color: green;
 }
 
+/* PRODUCTS GRID */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  column-gap: 20px;
+  row-gap: 20px;
+  padding: 10px;
+  align-items: stretch;
+  gap: 25px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  text-align: center;
+  transition: 0.2s;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 5px solid #eee;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* IMAGE */
+.card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* MOBILE */
 @media (max-width: 600px) {
+
+  .products {
+    grid-template-columns: repeat(2, 1fr); /* 2 багана */
+    gap: 15px;
+  }
+
   .card {
-    padding: 15px;
-    margin: 0;
+    padding: 12px;
     border-radius: 12px;
   }
 
   .card img {
     height: 120px;
+    object-fit: contain;
   }
 
   .card h4 {
@@ -239,7 +292,7 @@ button {
 
   .desc {
     font-size: 12px;
-    height: 30px;
+    height: auto;
     margin-bottom: 10px;
   }
 
@@ -248,7 +301,6 @@ button {
     padding: 10px;
   }
 }
-
 
 #productList {
   display: grid;
@@ -283,7 +335,7 @@ button {
   width: 300px;
   background: white;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.3);
   display: none;
   z-index: 1000;
@@ -360,6 +412,23 @@ button {
     padding: 10px;
   }
 
+.order-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  background: #28a745; /* ногоон */
+  transition: 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.order-btn:hover {
+  background: #218838;
+  transform: scale(1.03);
+}
+
+
   /* CARD */
   .card {
     display: flex;
@@ -402,23 +471,17 @@ button {
 <body>
 
 <div class="header">
-  <h2>BDM brand</h2>
+  <h2>BDM</h2>
 
-  <div class="contact-bar">
+<div class="contact-bar">
     <a href="tel:99155597">
       <i class="fa-solid fa-phone"></i> 99155597
-    </a>
-
-    <a href="tel:88928814">
-      <i class="fa-solid fa-phone"></i> 88928814
     </a>
 
     <a href="#">
       <i class="fa-brands fa-facebook"></i> Бдм Кассын Төхөөрөмж
     </a>
-
-  </div>
-
+</div>
   <div class="cart-icon" onclick="toggleCart()">
     🛒
     <span id="cartCount">0</span>
@@ -460,9 +523,10 @@ style="width:90%; padding:8px; margin-top:5px; margin-bottom:8px;">
 <textarea id="address"
 style="width:70%; padding:40px; margin-top:5px;"></textarea>
 
-  <button onclick="sendOrder()" style="width:100%;">
-    Захиалга илгээх
-  </button>
+<button onclick="sendOrder()" class="order-btn">
+  Захиалга илгээх
+</button>
+
 </div>
 
 <div id="lightbox" onclick="this.style.display='none'">
@@ -482,6 +546,10 @@ const products = [
   {code:"10003", name:"Компьютер-2 дэлгэцтэй I7-7th", desc: " Processor: 7th Gen Intel(R) Core(TM) i7 Memory: 16GB RAM - 15.6 inch Dual Touch Screen", price:1800000, category:"Кассын машин", image:"10003.jpg"},
   {code:"10004", name:"Android Kiosk 27", price:4300000, category:"Кассын машин", image:"10004.jpg"},
   {code:"10005", name:"CY-M1-464 Android Kiosk", price:1400000, category:"Кассын машин", image:"10005.jpg"},
+  // Багц 
+ {code:"7005", name:"Багц 1", price:1600000, category:"Багц", image:"7005.jpg"},
+ {code:"7006", name:"Багц 2", price:1800000, category:"Багц", image:"7006.jpg"},
+ {code:"7007", name:"Багц 3", price:2200000, category:"Багц", image:"7007.jpg"},
 
   // Принтер
   {code:"20002", name:"Баримт хэвлэгч принтер 58мм XPrinter", desc: "E-barimt хэвлэх зориулалттай - Цаасны өргөн 58мм - USB", price:100000, category:"Принтер", image:"20002.jpg"},
@@ -513,19 +581,19 @@ const products = [
   {code:"50008", name:"WiFi хүлээн авагч 3000Mbps", price:100000, category:"Бусад", image:"50008.jpg"}
 ];
 
-let selectedCategory = "";
+let selectedCategory = products[0].category;
 let cart = {};
 
 /* CATEGORY */
 function renderCategories(){
   const catBox = document.getElementById("categories");
-  const cats = ["", ...new Set(products.map(p => p.category))];
+  const cats = [...new Set(products.map(p => p.category))];
 
   catBox.innerHTML = "";
 
   cats.forEach(cat=>{
     let btn = document.createElement("button");
-    btn.textContent = cat || "Бүгд";
+    btn.textContent = cat;
 
     if(cat===selectedCategory){
       btn.classList.add("active");
@@ -610,9 +678,9 @@ function renderProducts(){
   list.innerHTML = "";
 
   const filtered = products.filter(p =>
-    p.name.toLowerCase().includes(search) &&
-    (selectedCategory==="" || p.category===selectedCategory)
-  );
+   p.name.toLowerCase().includes(search) &&
+   p.category === selectedCategory
+);
 
   filtered.forEach(p=>{
     let div = document.createElement("div");
