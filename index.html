@@ -645,6 +645,12 @@ text += "📱 Утас: " + phone + "\n"
 text += "📍 Хаяг: " + address + "\n"
 text += "⏰ Огноо: " + new Date().toLocaleString();
 
+let token = "8306908505:AAEIewab1K7KxUv0hZBwP-_NTEQ3rxZAbIo";
+let chat_id = "1602998627";
+
+let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(text)}`;
+
+
 fetch(url)
 .then(res => res.json())
 .then(data => {
