@@ -541,15 +541,15 @@ style="width:70%; padding:40px; margin-top:5px;"></textarea>
 /* DATA */
 const products = [
   // Кассын машин
-  {code:"10001", name:"Компьютер-1 дэлгэцтэй I5-5th", desc: " Processor: 5th Gen Intel(R) Core(TM) i5 Memory: 8GB RAM - 15.6 inch Touch Screen", price:1200000, category:"Кассын машин", image:"10001.jpg"},
-  {code:"10002", name:"Компьютер-2 дэлгэцтэй I5-5th", desc: " Processor: 5th Gen Intel(R) Core(TM) i5 Memory: 8GB RAM - 15.6 inch 11.5 inch Dual Touch Screen", price:1400000, category:"Кассын машин", image:"10002.jpg"},
-  {code:"10003", name:"Компьютер-2 дэлгэцтэй I7-7th", desc: " Processor: 7th Gen Intel(R) Core(TM) i7 Memory: 16GB RAM - 15.6 inch Dual Touch Screen", price:1800000, category:"Кассын машин", image:"10003.jpg"},
+  {code:"10001", name:"Компьютер-1 дэлгэцтэй I5-5th", desc: " Processor: 5th Gen Intel(R) Core(TM) i5 Memory: 8GB RAM - 15.6 inch Touch Screen", price:1100000, category:"Кассын машин", image:"10001.jpg"},
+  {code:"10002", name:"Компьютер-2 дэлгэцтэй I5-5th", desc: " Processor: 5th Gen Intel(R) Core(TM) i5 Memory: 8GB RAM - 15.6 inch 11.5 inch Dual Touch Screen", price:1200000, category:"Кассын машин", image:"10002.jpg"},
+  {code:"10003", name:"Компьютер-2 дэлгэцтэй I7-7th", desc: " Processor: 7th Gen Intel(R) Core(TM) i7 Memory: 16GB RAM - 15.6 inch Dual Touch Screen", price:1600000, category:"Кассын машин", image:"10003.jpg"},
   {code:"10004", name:"Android Kiosk 27", price:4300000, category:"Кассын машин", image:"10004.jpg"},
   {code:"10005", name:"CY-M1-464 Android Kiosk", price:1400000, category:"Кассын машин", image:"10005.jpg"},
   // Багц 
- {code:"7005", name:"Багц 1", desc: "Компьютер-1 дэлгэцтэй I5-5th Баримт хэвлэгч принтер 58мм XPrinter Баркод уншигч суурин сканер Мөнгөний хайрцаг /47×15×48/ ПОС-ын суурь", price:1600000, category:"Багц", image:"7005.jpg"},
- {code:"7006", name:"Багц 2", desc: "Компьютер-2 дэлгэцтэй I5-5th Баримт хэвлэгч принтер 58мм XPrinter Баркод уншигч суурин сканер Мөнгөний хайрцаг /47×15×48/ ПОС-ын суурь", price:1800000, category:"Багц", image:"7006.jpg"},
- {code:"7007", name:"Багц 3", desc: "Компьютер-2 дэлгэцтэй I7-7th Баримт хэвлэгч принтер 58мм XPrinter Баркод уншигч суурин сканер Мөнгөний хайрцаг /47×15×48/ ПОС-ын суурь", price:2200000, category:"Багц", image:"7007.jpg"},
+ {code:"7005", name:"Багц 1", desc: "Компьютер-1 дэлгэцтэй I5-5th Баримт хэвлэгч принтер 58мм XPrinter Баркод уншигч суурин сканер Мөнгөний хайрцаг /47×15×48/ ПОС-ын суурь", price:1500000, category:"Багц", image:"7005.jpg"},
+ {code:"7006", name:"Багц 2", desc: "Компьютер-2 дэлгэцтэй I5-5th Баримт хэвлэгч принтер 58мм XPrinter Баркод уншигч суурин сканер Мөнгөний хайрцаг /47×15×48/ ПОС-ын суурь", price:1600000, category:"Багц", image:"7006.jpg"},
+ {code:"7007", name:"Багц 3", desc: "Компьютер-2 дэлгэцтэй I7-7th Баримт хэвлэгч принтер 58мм XPrinter Баркод уншигч суурин сканер Мөнгөний хайрцаг /47×15×48/ ПОС-ын суурь", price:2000000, category:"Багц", image:"7007.jpg"},
 
   // Принтер
   {code:"20002", name:"Баримт хэвлэгч принтер 58мм XPrinter", desc: "E-barimt хэвлэх зориулалттай - Цаасны өргөн 58мм - USB", price:100000, category:"Принтер", image:"20002.jpg"},
@@ -643,11 +643,6 @@ text += "💵 Нийт: " + document.getElementById("total").textContent + "\n"
 text += "📱 Утас: " + phone + "\n"
 text += "📍 Хаяг: " + address + "\n"
 text += "⏰ Огноо: " + new Date().toLocaleString();
-
-let token = "8306908505:AAEIewab1K7KxUv0hZBwP-_NTEQ3rxZAbIo";
-let chat_id = "1602998627";
-
-let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(text)}`;
 
 fetch(url)
 .then(res => res.json())
